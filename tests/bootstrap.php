@@ -23,6 +23,21 @@ if (!function_exists('add_filter')) {
     }
 }
 
+if (!function_exists('add_action')) {
+    function add_action(string $hook, callable $callback, int $priority = 10, int $acceptedArgs = 1): bool
+    {
+        WordPressState::$actions[] = compact('hook', 'callback', 'priority', 'acceptedArgs');
+        return true;
+    }
+}
+
+if (!function_exists('get_theme_mod')) {
+    function get_theme_mod(string $name, mixed $default = false): mixed
+    {
+        return WordPressState::$themeMods[$name] ?? $default;
+    }
+}
+
 if (!function_exists('wp_is_block_theme')) {
     function wp_is_block_theme(): bool
     {

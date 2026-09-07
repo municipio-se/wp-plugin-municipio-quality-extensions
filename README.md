@@ -37,6 +37,34 @@ older WordPress versions, or runtimes without the public buffer API.
 The feature can be removed once supported Municipio versions let WordPress run
 `wp_before_include_template` before rendering their response.
 
+## Server-local Material Symbols SVG
+
+The optional Material Symbols integration reads prebuilt SVGs from a local,
+root-owned store and injects them through Component Library's documented icon
+data and attribute filters. It performs one indexed seek for each distinct icon
+variant in a request. Missing, unreadable or invalid data preserves Component
+Library's original font rendering.
+
+The integration is disabled unless both constants are configured:
+
+```php
+define('MUNICIPIO_QUALITY_EXTENSIONS_MATERIAL_SYMBOLS_SVG_ENABLED', true);
+define(
+    'MUNICIPIO_QUALITY_EXTENSIONS_MATERIAL_SYMBOLS_STORE_PATH',
+    '/path/to/material-symbols',
+);
+```
+
+The store must contain a `current` symlink to a release under `releases/`, with
+one JSON offset index and uncompressed SVG pack per supported style, weight and
+fill combination. The plugin validates names, byte ranges and content hashes
+before rendering. It does not download, generate or write icons during a web
+request.
+
+The Material Symbols font remains a fallback in this phase. Remove its
+stylesheet only after every icon-rendering path used by the installation has
+been verified with the SVG integration enabled.
+
 ## Development
 
 ```console
