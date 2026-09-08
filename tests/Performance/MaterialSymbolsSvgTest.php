@@ -88,4 +88,11 @@ final class MaterialSymbolsSvgTest extends TestCase
             $feature->filterAttributes(['data-material-symbol' => 'search']),
         );
     }
+
+    public function testItPreservesSerializedAttributesFromNestedRenderPaths(): void
+    {
+        $attributes = 'class="c-field" data-component="field"';
+
+        static::assertSame($attributes, (new MaterialSymbolsSvg(true, $this->store))->filterAttributes($attributes));
+    }
 }

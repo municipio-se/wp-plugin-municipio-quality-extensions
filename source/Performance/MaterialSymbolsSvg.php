@@ -50,11 +50,20 @@ final class MaterialSymbolsSvg
         return $data;
     }
 
-    /** @param array<string, mixed> $attributes
-     *  @return array<string, mixed>
+    /**
+     * Component Library normally filters the attribute array while building a
+     * component, but some nested Blade render paths reuse the hook after the
+     * attributes have already been serialized. Preserve that string unchanged.
+     *
+     * @param array<string, mixed>|string $attributes
+     * @return array<string, mixed>|string
      */
-    public function filterAttributes(array $attributes): array
+    public function filterAttributes(array|string $attributes): array|string
     {
+        if (is_string($attributes)) {
+            return $attributes;
+        }
+
         if (array_key_exists(self::MARKER_ATTRIBUTE, $attributes)) {
             unset($attributes['data-material-symbol']);
         }
