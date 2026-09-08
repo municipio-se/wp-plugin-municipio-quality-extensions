@@ -38,6 +38,25 @@ if (!function_exists('get_theme_mod')) {
     }
 }
 
+if (!function_exists('wp_register_style')) {
+    function wp_register_style(string $handle, string|false $src, array $deps = [], string|bool|null $ver = false): bool
+    {
+        return true;
+    }
+}
+
+if (!function_exists('wp_enqueue_style')) {
+    function wp_enqueue_style(string $handle): void {}
+}
+
+if (!function_exists('wp_add_inline_style')) {
+    function wp_add_inline_style(string $handle, string $data): bool
+    {
+        WordPressState::$inlineStyles[$handle] = $data;
+        return true;
+    }
+}
+
 if (!function_exists('wp_is_block_theme')) {
     function wp_is_block_theme(): bool
     {

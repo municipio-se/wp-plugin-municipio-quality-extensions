@@ -60,8 +60,19 @@ final class MaterialSymbolsSvgTest extends TestCase
         ]);
 
         static::assertStringContainsString('aria-hidden="true"', $result['svgElementFromFile']);
-        static::assertContains('c-icon--svg-path', $result['classList']);
+        static::assertNotContains('c-icon--svg-path', $result['classList']);
         static::assertArrayHasKey('data-mqe-material-symbol-svg', $result['attributeList']);
+    }
+
+    public function testItNeutralizesFontGeometryWithoutApplyingGenericSvgPathStyles(): void
+    {
+        (new MaterialSymbolsSvg(true, $this->store))->enqueueStyles();
+
+        $styles = WordPressState::$inlineStyles['municipio-quality-extensions-material-symbols-svg'];
+        static::assertStringContainsString('::after{content:none!important;display:none!important}', $styles);
+        static::assertStringContainsString('inline-size:1em;block-size:1em', $styles);
+        static::assertStringContainsString('inline-size:100%!important;block-size:100%!important', $styles);
+        static::assertStringContainsString('path{fill:currentColor;stroke:none}', $styles);
     }
 
     public function testItPreservesFontFallbackWhenTheSvgIsMissing(): void

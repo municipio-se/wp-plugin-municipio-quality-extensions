@@ -7,6 +7,12 @@ namespace MunicipioQualityExtensions\Performance;
 final class MaterialSymbolsSvg
 {
     private const MARKER_ATTRIBUTE = 'data-mqe-material-symbol-svg';
+    private const INLINE_STYLE = <<<'CSS'
+        .c-icon[data-mqe-material-symbol-svg]{flex:none;inline-size:1em;block-size:1em;line-height:1}
+        .c-icon[data-mqe-material-symbol-svg]::after{content:none!important;display:none!important}
+        .c-icon[data-mqe-material-symbol-svg]>svg{display:block;inline-size:100%!important;block-size:100%!important;fill:currentColor}
+        .c-icon[data-mqe-material-symbol-svg]>svg path{fill:currentColor;stroke:none}
+        CSS;
 
     public function __construct(
         private readonly bool $enabled,
@@ -42,8 +48,6 @@ final class MaterialSymbolsSvg
         }
 
         $data['svgElementFromFile'] = '<svg aria-hidden="true" focusable="false" ' . substr($svg, 5);
-        $data['classList'] = is_array($data['classList'] ?? null) ? $data['classList'] : [];
-        $data['classList'][] = 'c-icon--svg-path';
         $data['attributeList'] = is_array($data['attributeList'] ?? null) ? $data['attributeList'] : [];
         $data['attributeList'][self::MARKER_ATTRIBUTE] = '';
 
@@ -75,9 +79,6 @@ final class MaterialSymbolsSvg
     {
         wp_register_style('municipio-quality-extensions-material-symbols-svg', false, [], '1');
         wp_enqueue_style('municipio-quality-extensions-material-symbols-svg');
-        wp_add_inline_style(
-            'municipio-quality-extensions-material-symbols-svg',
-            '.c-icon[data-mqe-material-symbol-svg]>svg{display:block;width:1em;height:1em;fill:currentColor}',
-        );
+        wp_add_inline_style('municipio-quality-extensions-material-symbols-svg', self::INLINE_STYLE);
     }
 }

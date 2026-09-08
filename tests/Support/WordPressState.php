@@ -14,6 +14,8 @@ final class WordPressState
     public static int $bufferStarts = 0;
     /** @var array<string, mixed> */
     public static array $themeMods = [];
+    /** @var array<string, string> */
+    public static array $inlineStyles = [];
     public static string $wordpressVersion = '6.9.4';
 
     public static function reset(): void
@@ -23,6 +25,7 @@ final class WordPressState
         self::$blockTheme = false;
         self::$bufferStarts = 0;
         self::$themeMods = [];
+        self::$inlineStyles = [];
         self::$wordpressVersion = '6.9.4';
     }
 }
