@@ -15,6 +15,10 @@
   text-decoration: none;
 }
 
+.c-card.qx-card--no-underline .qx-card__primary-link:hover {
+  text-decoration: underline;
+}
+
 /* The ordinary heading link remains usable when :has() is unavailable. */
 .c-card.qx-card:not(:has(a[href]:not(.qx-card__primary-link), button, input, select, textarea, summary, iframe, audio[controls], video[controls], [tabindex], [contenteditable]:not([contenteditable="false"]), [role="button"], [role="link"])) {
   /* Styleguide limits these effects to a.c-card. Keep its tokens and timing
@@ -43,6 +47,10 @@
     background-color: var(--color-lightest, #fcfcfc);
     transform: translateY(calc(0px - var(--base, 8px) * 0.25));
     transition: all 0.2s ease-out;
+
+    .qx-card__primary-link {
+      text-decoration: underline;
+    }
 
     .c-card__image::before {
       opacity: 0.08;
