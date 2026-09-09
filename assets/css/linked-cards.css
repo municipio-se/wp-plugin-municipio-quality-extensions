@@ -1,0 +1,32 @@
+/* Keep the existing paint containment, shadow and container queries. Flex fills equal-height cards. */
+.c-card.qx-card > .c-card__paint-container {
+  flex: 1;
+}
+
+.c-card.qx-card .qx-card__primary-link {
+  color: inherit;
+}
+
+.c-card.qx-card--underline .qx-card__primary-link {
+  text-decoration: underline;
+}
+
+.c-card.qx-card--no-underline .qx-card__primary-link {
+  text-decoration: none;
+}
+
+/* The ordinary heading link remains usable when :has() is unavailable. */
+.c-card.qx-card:not(:has(a[href]:not(.qx-card__primary-link), button, input, select, textarea, summary, iframe, audio[controls], video[controls], [tabindex], [contenteditable]:not([contenteditable="false"]), [role="button"], [role="link"])) {
+  .qx-card__primary-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3001;
+    cursor: pointer;
+  }
+
+  &:has(.qx-card__primary-link:focus-visible) {
+    outline: calc(var(--base, 8px) * 0.375) solid var(--color-focus-outline, #4d90fe);
+    outline-offset: calc(var(--base, 8px) * 0.5);
+  }
+}

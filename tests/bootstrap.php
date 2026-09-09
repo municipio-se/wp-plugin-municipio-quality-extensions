@@ -46,7 +46,31 @@ if (!function_exists('wp_register_style')) {
 }
 
 if (!function_exists('wp_enqueue_style')) {
-    function wp_enqueue_style(string $handle): void {}
+    function wp_enqueue_style(string $handle, string $src = '', array $deps = [], string|bool|null $ver = false): void
+    {
+        WordPressState::$styles[$handle] = $src;
+    }
+}
+
+function __(string $text, string $domain = ''): string
+{
+    return $domain === 'municipio' && $text === 'Read more' ? 'Läs mer' : $text;
+}
+
+function get_option(string $name, mixed $default = false): mixed
+{
+    return $name === 'stylesheet' ? 'municipio' : WordPressState::$themeMods;
+}
+
+function set_theme_mod(string $name, mixed $value): void
+{
+    WordPressState::$themeMods[$name] = $value;
+    ++WordPressState::$themeModWrites;
+}
+
+function plugins_url(string $path, string $plugin): string
+{
+    return '/plugins/qx/' . $path;
 }
 
 if (!function_exists('wp_add_inline_style')) {

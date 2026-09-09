@@ -25,5 +25,16 @@ if (is_readable($autoload)) {
 }
 
 if (class_exists(Plugin::class)) {
+    add_action(
+        'init',
+        static function (): void {
+            load_plugin_textdomain(
+                'municipio-quality-extensions',
+                false,
+                dirname(plugin_basename(__FILE__)) . '/languages',
+            );
+        },
+        0,
+    );
     (new Plugin())->register();
 }
