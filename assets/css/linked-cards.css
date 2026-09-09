@@ -17,6 +17,38 @@
 
 /* The ordinary heading link remains usable when :has() is unavailable. */
 .c-card.qx-card:not(:has(a[href]:not(.qx-card__primary-link), button, input, select, textarea, summary, iframe, audio[controls], video[controls], [tabindex], [contenteditable]:not([contenteditable="false"]), [role="button"], [role="link"])) {
+  /* Styleguide limits these effects to a.c-card. Keep its tokens and timing
+     for the div wrapper only while the whole card is a single click target. */
+  .c-card__image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.2s;
+    height: 100%;
+    width: 100%;
+    background: var(--color-lighter, #e5e5e5);
+    opacity: 0;
+    z-index: 1000;
+  }
+
+  &:hover {
+    filter: var(
+      --drop-shadow-3,
+      drop-shadow(
+        0px calc(8px * var(--drop-shadow-amount, 0.7))
+          calc(10px * var(--drop-shadow-amount, 0.7))
+          var(--drop-shadow-color, rgba(0, 0, 0, 0.1))
+      )
+    );
+    background-color: var(--color-lightest, #fcfcfc);
+    transform: translateY(calc(0px - var(--base, 8px) * 0.25));
+    transition: all 0.2s ease-out;
+
+    .c-card__image::before {
+      opacity: 0.08;
+    }
+  }
+
   .qx-card__primary-link::after {
     content: "";
     position: absolute;
