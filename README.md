@@ -3,13 +3,15 @@
 Municipio Quality Extensions provides focused runtime improvements for modern
 Municipio installations. Features belong here when they improve accessibility,
 performance, security, or web standards through stable WordPress or Municipio
-extension points and are too broad or version-specific for a small upstream
-fix.
+extension points and are too broad or version-specific for a small upstream fix.
 
 The plugin is independent of Municipio Cloud and contains no customer-specific
 behavior. Municipio LTS is not a supported runtime.
 
 ## Installation
+
+See [RELEASING.md](RELEASING.md) for release gates, compatibility evidence,
+publication and rollback.
 
 Install the package with Composer:
 
@@ -69,8 +71,8 @@ been verified with the SVG integration enabled.
 
 Under **Customize → Component appearance → Card**, enable **Use heading links
 for cards** for the current site. The feature is off by default, including when
-the plugin is network activated. **Underline card heading links** defaults to
-on and can be disabled separately. Both settings use a full preview refresh.
+the plugin is network activated. **Underline card heading links** defaults to on
+and can be disabled separately. Both settings use a full preview refresh.
 
 Supported callers are Posts cards, Manual Input's `card` appearance and
 Navigation's `cards` appearance with the `module.navigation.cards` context.
