@@ -24,6 +24,17 @@ On 2026-09-14, the isolated suite passed on PHP 8.3.33: 25 tests and 123
 assertions. Composer validation and lint passed with existing help diagnostics.
 Reference acceptance remains required for changes beyond the consumer's lock.
 
+On 2026-09-17, persisted migrations passed in a disposable WordPress 6.9.4
+multisite on PHP 8.3.33. Fresh/absent and malformed sources stayed unchanged;
+legacy booleans migrated, explicit false targets survived, later imports were
+handled and repeated execution across blog switches remained idempotent. A real
+SQL export/import restored all eight Theme/Quality fixtures exactly, including
+absent migration markers, and migrations passed again afterwards. The reusable
+runner is scripts/verify-package-migrations.py in Municipio Cloud Tooling. This
+is data recovery evidence, not an end-to-end accessibility test or a customer
+disaster recovery drill. Runtime code remains identical to 666a855, now deployed
+to both Nora environments; the former production-code gap is closed.
+
 - Verify late-style hoisting on the reference site and the documented no-op
   paths. Keep core WordPress responsible for buffering and output.
 - Verify optional SVG rendering, fallback and icon geometry before enabling it
