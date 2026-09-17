@@ -2,12 +2,13 @@
 
 ## First stable release
 
-The prepared first candidate is 1.0.0 with independent SemVer. It remains
-unreleased until the exact commit is approved and published. Documented card
-settings, preserved data, card hooks and late-style hoisting form the stable
-contract. The unfinished SVG integration is explicitly excluded and must remain
-disabled. Incompatible changes to the stable contract require a major release;
-compatible additions and fixes use minor and patch releases.
+Version
+[1.0.0](https://github.com/municipio-se/wp-plugin-municipio-quality-extensions/releases/tag/1.0.0)
+was published on 2026-09-17 with independent SemVer. Documented card settings,
+preserved data, card hooks and late-style hoisting form the stable contract. The
+unfinished SVG integration is explicitly excluded and must remain disabled.
+Incompatible changes require a major release; compatible additions and fixes use
+minor and patch releases.
 
 Distribution remains Composer VCS with an only restriction for
 municipio/wp-plugin-municipio-quality-extensions. Packagist registration is not
@@ -60,7 +61,7 @@ composer lint. Verify clean installation through the restricted VCS source,
 including autoloading and shipped assets.
 
 Obtain approval for the exact commit and compatibility evidence before
-publishing an annotated 1.0.0 tag and matching GitHub release. Verify Composer
+publishing an annotated version tag and matching GitHub release. Verify Composer
 source and dist references against the peeled tag commit. Never move a published
 tag. Approved consumers require ^1.0 through the restricted VCS source, with a
 reviewed and committed lockfile. Deployment requires its own approval and
@@ -70,3 +71,14 @@ Retain previous code, lockfile, feature configuration and a tested recovery
 point for migrated theme mods. A lockfile rollback alone does not reverse data
 changes. Do not enable optional features or delete legacy values as a side
 effect of a version-only upgrade.
+
+## Publication evidence, 2026-09-17
+
+The published tag was verified against Composer source/dist references and a
+clean installation. Nora stage and production adopted 1.0.0 with WordPress
+6.9.4, PHP 8.3.6 and Municipio 6.43.3. Acceptance is limited to the documented
+reference cases and preserved configuration.
+
+This documentation was corrected after publication. The immutable 1.0.0 archive
+retains the original candidate wording. Never move the tag to include this
+documentation correction.
