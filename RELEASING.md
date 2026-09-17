@@ -2,11 +2,12 @@
 
 ## First stable release
 
-The planned first tag is 1.0.0 with independent SemVer. Keep the development
-header until reference and migration acceptance is complete. Documented
-settings, preserved data, hooks and intentional runtime behavior form the stable
-contract. Incompatible changes require a major release; compatible additions and
-fixes use minor and patch releases.
+The prepared first candidate is 1.0.0 with independent SemVer. It remains
+unreleased until the exact commit is approved and published. Documented card
+settings, preserved data, card hooks and late-style hoisting form the stable
+contract. The unfinished SVG integration is explicitly excluded and must remain
+disabled. Incompatible changes to the stable contract require a major release;
+compatible additions and fixes use minor and patch releases.
 
 Distribution remains Composer VCS with an only restriction for
 municipio/wp-plugin-municipio-quality-extensions. Packagist registration is not
@@ -37,11 +38,15 @@ to both Nora environments; the former production-code gap is closed.
 
 - Verify late-style hoisting on the reference site and the documented no-op
   paths. Keep core WordPress responsible for buffering and output.
-- Verify optional SVG rendering, fallback and icon geometry before enabling it
-  in a consumer. Do not remove the font stylesheet based solely on unit tests.
-- Complete visual and assistive-technology checks for heading-linked cards,
-  hover effects, secondary controls and underline choices. Verify Navigation
-  cards both with and without the module.navigation.cards context.
+- Fredrik confirmed the requested Nora stage screen-reader check for a news card
+  heading link on 2026-09-17. Together with existing visual acceptance and
+  component tests this closes the card acceptance gate for 1.0.0. It does not
+  claim a new exhaustive assistive-technology audit of every card variant.
+- SVG work remains unfinished in the separate feature task. Before adopting
+  1.0.0, verify that `MUNICIPIO_QUALITY_EXTENSIONS_MATERIAL_SYMBOLS_SVG_ENABLED`
+  is undefined or `false`, including on stage environments that previously opted
+  in. Keep the icon font stylesheet. This is a consumer configuration gate; the
+  experimental code is retained without broadening the stable contract.
 - Verify the linked-card migration with fresh data, absent and malformed
   sources, legacy values, explicit target values, repeated requests and
   multisite blog switches. Preserve source values and document code/data

@@ -41,6 +41,12 @@ The feature can be removed once supported Municipio versions let WordPress run
 
 ## Server-local Material Symbols SVG
 
+This integration is unfinished and excluded from the stable 1.0.0 contract. Keep
+`MUNICIPIO_QUALITY_EXTENSIONS_MATERIAL_SYMBOLS_SVG_ENABLED` undefined or `false`
+when adopting 1.0.0, including on a site that previously enabled the development
+experiment. Retain the icon font and its stylesheet. The opt-in instructions
+below are for continued development, not stable-release use.
+
 The optional Material Symbols integration reads prebuilt SVGs from a local,
 root-owned store and injects them through Component Library's documented icon
 data and attribute filters. It performs one indexed seek for each distinct icon
