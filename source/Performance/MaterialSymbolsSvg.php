@@ -7,8 +7,9 @@ namespace MunicipioQualityExtensions\Performance;
 final class MaterialSymbolsSvg
 {
     private const MARKER_ATTRIBUTE = 'data-mqe-material-symbol-svg';
+    // Field icons have padding outside the glyph; it must not consume the SVG's 1em.
     private const INLINE_STYLE = <<<'CSS'
-        .c-icon[data-mqe-material-symbol-svg]{flex:none;inline-size:1em;block-size:1em;line-height:1}
+        .c-icon[data-mqe-material-symbol-svg]{box-sizing:content-box;flex:none;inline-size:1em;block-size:1em;line-height:1}
         .c-icon[data-mqe-material-symbol-svg]::after{content:none!important;display:none!important}
         .c-icon[data-mqe-material-symbol-svg]>svg{display:block;inline-size:100%!important;block-size:100%!important;fill:currentColor}
         .c-icon[data-mqe-material-symbol-svg]>svg path{fill:currentColor;stroke:none}
