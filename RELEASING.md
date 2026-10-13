@@ -16,6 +16,12 @@ field to composer.json or claim Packagist verification for this package.
 
 ## Compatibility and acceptance
 
+The navigation-index CLI is a subsequent, locally verified addition, outside the
+original candidate's acceptance. Its README documents explicit opt-in and
+database rollback. Include its lifecycle tests and database compatibility in the
+review of any release that contains it; do not infer acceptance from the earlier
+1.0.0 checks below.
+
 The primary target is WordPress 6.9.4, PHP 8.3, Municipio theme 6.43.3 and
 Component Library 5.10.0. Record required hook patches and the optional local
 icon-store configuration. The PHP requirement and feature guards do not prove

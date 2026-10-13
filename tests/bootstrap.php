@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use MunicipioQualityExtensions\Tests\Support\OptionsState;
 use MunicipioQualityExtensions\Tests\Support\WordPressState;
 
 WordPressState::reset();
@@ -59,7 +60,25 @@ function __(string $text, string $domain = ''): string
 
 function get_option(string $name, mixed $default = false): mixed
 {
+    if ($name === 'municipio_qx_navigation_index') {
+        return OptionsState::$values[$name] ?? $default;
+    }
     return $name === 'stylesheet' ? 'municipio' : WordPressState::$themeMods;
+}
+
+function update_option(string $name, mixed $value, mixed $autoload = null): bool
+{
+    if (OptionsState::$writesFail) {
+        return false;
+    }
+    OptionsState::$values[$name] = $value;
+    return true;
+}
+
+function delete_option(string $name): bool
+{
+    unset(OptionsState::$values[$name]);
+    return true;
 }
 
 function set_theme_mod(string $name, mixed $value): void

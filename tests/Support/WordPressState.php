@@ -27,6 +27,7 @@ final class WordPressState
         self::$blockTheme = false;
         self::$bufferStarts = 0;
         self::$themeMods = [];
+        OptionsState::reset();
         self::$themeModWrites = 0;
         self::$styles = [];
         self::$inlineStyles = [];

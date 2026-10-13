@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased changes after the 1.0.0 candidate
+
+Add an opt-in navigation metadata index managed through per-site WP-CLI
+commands. Explicit rollback preserves external indexes, while advisory locking
+and verified migration records protect retries and concurrent operations. This
+feature has not been included in a published release.
+
 ## 1.0.0 — unreleased
 
 First stable candidate with independent semantic versioning. Includes WordPress

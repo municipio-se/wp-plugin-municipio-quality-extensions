@@ -110,6 +110,36 @@ source are preserved. The migration accepts boolean values and their strict
 `0`/`1`/`false`/`true` representations. Missing or invalid source values are
 rechecked on later requests so an import after plugin activation still works.
 
+## Optional navigation database index
+
+This unreleased feature is an explicit, per-site optimization. Plugin
+activation, network activation and ordinary requests never create or inspect
+indexes. Test the benefit on a representative copy of the site before enabling
+it.
+
+With the plugin active, use WP-CLI to inspect, enable or undo the optimization:
+
+```console
+wp --url=https://example.org municipio-quality navigation-index status
+wp --url=https://example.org municipio-quality navigation-index enable
+wp --url=https://example.org municipio-quality navigation-index disable
+```
+
+On multisite, `--url` selects exactly one site's metadata table. Other sites and
+new sites remain unchanged. Commands return JSON and report failures through
+WP-CLI's nonzero exit status. The database user needs permission to alter that
+table; index creation can briefly block concurrent writes.
+
+An existing active index with the same columns and prefix lengths is reused.
+`disable` removes only an unchanged index whose creation the plugin recorded
+successfully. External indexes and indexes left by an interrupted creation are
+preserved. A changed or disabled owned index requires manual inspection before
+rollback. Plugin deactivation also preserves the index.
+
+After a failed command, inspect `status` and retry the command after resolving
+the cause. Migration state is versioned; future migrations must also be invoked
+explicitly with `enable`, never as part of a page request or plugin update.
+
 ## Development
 
 ```console
