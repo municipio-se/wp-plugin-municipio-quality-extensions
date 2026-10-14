@@ -33,6 +33,18 @@ final class MaterialSymbolsSvg
 
         add_filter('ComponentLibrary/Component/Icon/Data', [$this, 'replaceIcon'], 100, 1);
         add_filter('ComponentLibrary/Component/Icon/Attribute', [$this, 'filterAttributes'], 100, 1);
+        add_filter(
+            'render_block_acf/interactivemap',
+            [new MaterialSymbolsMapStyles($this->store), 'filterMarkup'],
+            100,
+            1,
+        );
+        add_filter(
+            'Modularity/Display/mod-interactivemap/Markup',
+            [new MaterialSymbolsMapStyles($this->store), 'filterMarkup'],
+            100,
+            1,
+        );
         add_action('wp_enqueue_scripts', [$this, 'enqueueStyles'], 100);
         add_action('admin_enqueue_scripts', [$this, 'enqueueStyles'], 100);
     }

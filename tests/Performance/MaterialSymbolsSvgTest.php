@@ -33,7 +33,12 @@ final class MaterialSymbolsSvgTest extends TestCase
         (new MaterialSymbolsSvg(true, $this->store))->register();
 
         static::assertSame(
-            ['ComponentLibrary/Component/Icon/Data', 'ComponentLibrary/Component/Icon/Attribute'],
+            [
+                'ComponentLibrary/Component/Icon/Data',
+                'ComponentLibrary/Component/Icon/Attribute',
+                'render_block_acf/interactivemap',
+                'Modularity/Display/mod-interactivemap/Markup',
+            ],
             array_column(WordPressState::$filters, 'hook'),
         );
         static::assertSame(
