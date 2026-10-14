@@ -24,13 +24,14 @@ final class MaterialSymbolsMaskStyles
             $selector = $scope . $selector . ':not([data-mqe-material-symbol-svg])';
             // Encoding keeps validated SVG markup out of the inline style element.
             $url = 'data:image/svg+xml,' . rawurlencode($svg);
+            // Field padding surrounds the glyph and must neither shrink nor enlarge its mask.
             $rules .=
                 $selector
-                . '{display:inline-block;flex:none;inline-size:1em;block-size:1em;'
+                . '{display:inline-block;box-sizing:content-box;flex:none;inline-size:1em;block-size:1em;'
                 . 'background-color:currentColor;content-visibility:hidden;'
                 . 'mask:url("'
                 . $url
-                . '") center/contain no-repeat;}';
+                . '") center/contain no-repeat content-box;}';
             $rules .= $selector . '::after{content:none!important;display:none!important;}';
         }
 

@@ -26,7 +26,7 @@ final class MaterialSymbolsEventStylesTest extends TestCase
         $svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>';
         $store = $this->createMock(MaterialSymbolsStoreInterface::class);
         $store
-            ->expects(self::exactly(5))
+            ->expects(self::exactly(9))
             ->method('getIcon')
             ->willReturnCallback(static function (string $name, string $style, int $weight, int $fill) use (
                 $svg,
@@ -42,5 +42,22 @@ final class MaterialSymbolsEventStylesTest extends TestCase
         static::assertStringNotContainsString('.c-pagination__item--next', $css);
         static::assertStringContainsString(':not([data-mqe-material-symbol-svg])', $css);
         static::assertStringStartsWith('@supports ', $css);
+    }
+
+    public function testMissingOpenArrowDoesNotApplyClosedArrowToOpenDropdown(): void
+    {
+        WordPressState::reset();
+        $store = $this->createMock(MaterialSymbolsStoreInterface::class);
+        $store->method('getIcon')->willReturnCallback(static fn(string $name): ?string => $name
+            === 'keyboard_arrow_down'
+                ? '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z"/></svg>'
+                : null);
+        $css = MaterialSymbolsEventStyles::render($store);
+        static::assertStringContainsString(
+            '.modularity-event-index .c-dropdown:not(:has(> .c-dropdown__list)) > button',
+            $css,
+        );
+        static::assertStringNotContainsString('.c-dropdown:has(', $css);
+        static::assertStringNotContainsString('filter-keyword', $css);
     }
 }
