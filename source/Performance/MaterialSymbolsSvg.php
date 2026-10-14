@@ -23,12 +23,17 @@ final class MaterialSymbolsSvg
     public function __construct(
         private readonly bool $enabled,
         private readonly MaterialSymbolsStoreInterface $store,
+        private readonly bool $fontEnabled = true,
     ) {}
 
     public function register(): void
     {
         if (!$this->enabled) {
             return;
+        }
+
+        if (!$this->fontEnabled) {
+            add_filter('style_loader_tag', [new MaterialSymbolsFontStyles(), 'filterTag'], 100, 3);
         }
 
         add_filter('ComponentLibrary/Component/Icon/Data', [$this, 'replaceIcon'], 100, 1);
