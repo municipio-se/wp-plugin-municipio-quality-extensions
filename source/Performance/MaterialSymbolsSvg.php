@@ -80,6 +80,9 @@ final class MaterialSymbolsSvg
     {
         wp_register_style('municipio-quality-extensions-material-symbols-svg', false, [], '1');
         wp_enqueue_style('municipio-quality-extensions-material-symbols-svg');
-        wp_add_inline_style('municipio-quality-extensions-material-symbols-svg', self::INLINE_STYLE);
+        wp_add_inline_style(
+            'municipio-quality-extensions-material-symbols-svg',
+            self::INLINE_STYLE . MaterialSymbolsEventStyles::render($this->store),
+        );
     }
 }
