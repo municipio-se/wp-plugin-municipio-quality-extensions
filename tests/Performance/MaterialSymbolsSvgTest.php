@@ -106,4 +106,30 @@ final class MaterialSymbolsSvgTest extends TestCase
 
         static::assertSame($attributes, (new MaterialSymbolsSvg(true, $this->store))->filterAttributes($attributes));
     }
+
+    public function testDynamicMapControlsRetainTheirJavascriptSelectorAndBothStates(): void
+    {
+        $this->store->method('getIcon')->willReturn('<svg viewBox="0 0 24 24"><path d="M0 0"/></svg>');
+        $feature = new MaterialSymbolsSvg(true, $this->store);
+        foreach ([
+            ['check_box_outline_blank', 'check_box', []],
+            ['check_box', 'check_box_outline_blank', []],
+            ['tune', 'close', ['data-js-interactive-map-filter-icon' => '']],
+            ['close', 'tune', ['data-js-interactive-map-filter-icon' => '']],
+        ] as [$initial, $alternate, $attributes]) {
+            $result = $feature->replaceIcon(['icon' => $initial, 'attributeList' => $attributes]);
+            static::assertSame($initial, $feature->filterAttributes($result['attributeList'])['data-material-symbol']);
+            static::assertStringContainsString('data-mqe-icon="' . $initial . '"', $result['svgElementFromFile']);
+            static::assertStringContainsString('data-mqe-icon="' . $alternate . '"', $result['svgElementFromFile']);
+        }
+    }
+
+    public function testMissingAlternateStatePreservesTheEntireFontControl(): void
+    {
+        $this->store->method('getIcon')->willReturnCallback(static fn(string $name): ?string => $name === 'check_box'
+            ? '<svg viewBox="0 0 24 24"></svg>'
+            : null);
+        $data = ['icon' => 'check_box'];
+        static::assertSame($data, (new MaterialSymbolsSvg(true, $this->store))->replaceIcon($data));
+    }
 }
