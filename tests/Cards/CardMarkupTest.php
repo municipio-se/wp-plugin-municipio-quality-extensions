@@ -98,4 +98,13 @@ final class CardMarkupTest extends TestCase
         static::assertStringContainsString('&quot;Title&quot;', $result['heading']);
         static::assertStringNotContainsString('<script>', $result['heading']);
     }
+
+    public function testEventCardsUseTheSameHeadingLinkAndUnderlinePolicy(): void
+    {
+        $data = array_replace($this->card(), ['context' => ['module.event.index', 'component.card']]);
+        $result = (new CardMarkup())->transform($data, 'Läs mer', false);
+        static::assertSame('', $result['link']);
+        static::assertStringContainsString('href="/news/"', $result['heading']);
+        static::assertContains('qx-card--no-underline', $result['classList']);
+    }
 }

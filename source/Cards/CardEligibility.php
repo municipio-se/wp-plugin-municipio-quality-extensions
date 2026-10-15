@@ -7,7 +7,12 @@ namespace MunicipioQualityExtensions\Cards;
 /** Context identifies a verified caller; Segment and custom slots keep their own rendering. */
 final class CardEligibility
 {
-    private const CONTEXTS = ['module.posts.index', 'module.manual-input.card', 'module.navigation.cards'];
+    private const CONTEXTS = [
+        'module.posts.index',
+        'module.manual-input.card',
+        'module.navigation.cards',
+        'module.event.index',
+    ];
 
     public static function supports(array $data): bool
     {
