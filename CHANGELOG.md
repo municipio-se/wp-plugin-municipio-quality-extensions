@@ -1,11 +1,24 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 — release candidate
+
+Complete the opt-in local SVG integration with preserved glyph dimensions in
+padded fields and state-aware icons for event navigation, search pagination and
+interactive maps. Verified installations can disable the frontend Material
+Symbols font while retaining its layout rules; the default remains enabled.
+
+Support heading-linked event cards through the existing card settings.
 
 Add an opt-in navigation metadata index managed through per-site WP-CLI
 commands. Explicit rollback preserves external indexes, while advisory locking
 and verified migration records protect retries and concurrent operations. This
-feature has not been included in a published release.
+feature requires an explicit command and is not enabled by a package upgrade.
+
+This candidate is not yet published. Its SVG and navigation-index source matches
+the patched 1.0.0 stage implementation; event-card eligibility is the additional
+runtime change. The isolated suite passes 50 tests and 214 assertions on PHP
+8.3.33. Clean tagged installation and deployment verification remain release
+gates.
 
 ## 1.0.0 — 2026-09-17
 

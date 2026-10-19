@@ -1,5 +1,24 @@
 # Release process
 
+## 1.1.0 candidate
+
+The candidate completes the optional SVG integration, adds explicit navigation
+index commands and supports heading-linked event cards. Package upgrades do not
+enable SVG, remove the font or create database indexes. Existing 1.0.0 release
+evidence below is historical and does not imply acceptance of the new features.
+
+The SVG and navigation-index source is identical to 1.0.0 with the three
+verified Nora stage patches applied. Event-card eligibility is the only other
+runtime delta. Fredrik accepted stage icons, including menu, search and dynamic
+views, on 2026-10-19. Composer validation, 50 tests/214 assertions and lint pass
+on PHP 8.3.33; lint retains six help-level style diagnostics.
+
+Before publication, approve the exact candidate commit. Verify installation of
+the immutable tag, replace superseded consumer patches and deploy the package
+to stage before production. Verify store access, dynamic icons, fallback and
+font requests after deployment. Production activation and LTS decommissioning
+remain separate from preparing this candidate.
+
 ## First stable release
 
 Version

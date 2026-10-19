@@ -41,11 +41,9 @@ The feature can be removed once supported Municipio versions let WordPress run
 
 ## Server-local Material Symbols SVG
 
-This integration is unfinished and excluded from the stable 1.0.0 contract. Keep
-`MUNICIPIO_QUALITY_EXTENSIONS_MATERIAL_SYMBOLS_SVG_ENABLED` undefined or `false`
-when adopting 1.0.0, including on a site that previously enabled the development
-experiment. Retain the icon font and its stylesheet. The opt-in instructions
-below are for continued development, not stable-release use.
+The 1.1.0 candidate completes the optional integration previously excluded from
+the 1.0.0 contract. It remains disabled by default. Verify the icon paths used by
+each installation before disabling its font fallback.
 
 The optional Material Symbols integration reads prebuilt SVGs from a local,
 root-owned store and injects them through Component Library's documented icon
@@ -69,9 +67,13 @@ fill combination. The plugin validates names, byte ranges and content hashes
 before rendering. It does not download, generate or write icons during a web
 request.
 
-The Material Symbols font remains a fallback in this phase. Remove its
-stylesheet only after every icon-rendering path used by the installation has
-been verified with the SVG integration enabled.
+The Material Symbols font remains enabled by default. After verifying all icon
+paths used by the installation, set
+`MUNICIPIO_QUALITY_EXTENSIONS_MATERIAL_SYMBOLS_FONT_ENABLED` to `false` to remove
+the frontend font face while preserving layout CSS. Admin retains the original
+stylesheet. Unknown icons retain font markup, so font-free installations must
+verify their coverage. To roll back, enable the font, disable SVG and purge the
+affected page caches.
 
 ## Heading links for cards
 
@@ -81,7 +83,8 @@ the plugin is network activated. **Underline card heading links** defaults to on
 and can be disabled separately. Both settings use a full preview refresh.
 
 Supported callers are Posts cards, Manual Input's `card` appearance and
-Navigation's `cards` appearance with the `module.navigation.cards` context.
+Navigation's `cards` appearance with the `module.navigation.cards` context,
+and event cards with the `module.event.index` context.
 Segment cards, custom slots, collapsible cards and unknown callers retain their
 existing rendering. The integration uses `ComponentLibrary/Component/Card/Data`
 before the Card controller initializes. It requires the Municipio 6.x Card
