@@ -157,4 +157,20 @@ final class PostsHeadingsTest extends TestCase
             static::assertSame($level, ob_get_level());
         }
     }
+
+    public function testBlockCacheReceivesTheOriginalSerializableCallback(): void
+    {
+        $callback = [new BlockRenderer(), 'render'];
+        $settings = (new PostsHeadings())->blockSettings(['render_callback' => $callback], 'posts');
+        ob_start();
+        try {
+            $serialized = $settings['render_callback']([
+                'data' => [],
+                'render_callback' => $settings['render_callback'],
+            ]);
+            static::assertSame(serialize(['data' => [], 'render_callback' => $callback]), $serialized);
+        } finally {
+            ob_end_clean();
+        }
+    }
 }

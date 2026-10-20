@@ -35,6 +35,11 @@ final class PostsHeadings
         }
         $callback = $settings['render_callback'];
         $settings['render_callback'] = function (...$arguments) use ($callback) {
+            // Modularity serializes the block as its cache key. Restore the
+            // original callback there: this wrapper Closure is not serializable.
+            if (array_key_exists('render_callback', $arguments[0] ?? [])) {
+                $arguments[0]['render_callback'] = $callback;
+            }
             $level = ob_get_level();
             ob_start();
             try {

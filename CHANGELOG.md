@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1 — 2026-10-20
+
+Preserve the original Posts block callback in Modularity's serialized cache
+context. The heading wrapper continues to transform cached output without
+preventing block fragments from being cached.
+
 ## 1.2.0 — 2026-10-20
 
 Give Posts presentation titles H3 beneath a visible module H2, or H2 when the
