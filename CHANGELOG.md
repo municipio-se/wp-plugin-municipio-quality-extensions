@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0 — 2026-10-20
+
+Give Posts presentation titles H3 beneath a visible module H2, or H2 when the
+module heading is absent. Preserve each presentation's typography, links and
+other markup. Includes mixed layouts and sliders; expandable lists, content
+headings and modal headings retain their own hierarchy.
+
+Apply the same correction to module markup and Posts blocks, including cached
+block output. Existing module fragment caches use a new context version.
+
 ## 1.1.0 — release candidate
 
 Complete the opt-in local SVG integration with preserved glyph dimensions in

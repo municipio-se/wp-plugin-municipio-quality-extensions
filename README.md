@@ -143,6 +143,14 @@ After a failed command, inspect `status` and retry the command after resolving
 the cause. Migration state is versioned; future migrations must also be invoked
 explicitly with `enable`, never as part of a page request or plugin update.
 
+## Posts heading levels
+
+Posts heading levels are corrected automatically in 1.2.0. This integration
+requires WordPress's HTML Tag Processor and PHP DOM; the verified combination is
+WordPress 6.9.10, Municipio 6.43.3 and Component Library 5.10.0. Unsupported or
+ambiguous markup is left unchanged. Purge page and module caches when upgrading
+or rolling back.
+
 ## Development
 
 ```console

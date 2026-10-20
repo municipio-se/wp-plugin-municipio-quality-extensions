@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+foreach (['span', 'attribute-token', 'text-replacement', 'decoder', 'tag-processor'] as $class) {
+    require_once
+        dirname(__DIR__) . '/vendor/johnpbloch/wordpress-core/wp-includes/html-api/class-wp-html-' . $class . '.php';
+}
+
 use MunicipioQualityExtensions\Tests\Support\OptionsState;
 use MunicipioQualityExtensions\Tests\Support\WordPressState;
 
