@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/johnpbloch/wordpress-core/wp-includes/compat.php';
+require_once dirname(__DIR__) . '/vendor/johnpbloch/wordpress-core/wp-includes/utf8.php';
+require_once dirname(__DIR__) . '/vendor/johnpbloch/wordpress-core/wp-includes/kses.php';
 
 foreach (['span', 'attribute-token', 'text-replacement', 'decoder', 'tag-processor'] as $class) {
     require_once
@@ -13,6 +16,16 @@ use MunicipioQualityExtensions\Tests\Support\OptionsState;
 use MunicipioQualityExtensions\Tests\Support\WordPressState;
 
 WordPressState::reset();
+
+function apply_filters(string $hook, mixed $value, mixed ...$args): mixed
+{
+    $filters = array_filter(WordPressState::$filters, static fn($filter) => $filter['hook'] === $hook);
+    usort($filters, static fn($a, $b) => $a['priority'] <=> $b['priority']);
+    foreach ($filters as $filter) {
+        $value = $filter['callback'](...array_slice([$value, ...$args], 0, $filter['acceptedArgs']));
+    }
+    return $value;
+}
 
 if (!function_exists('get_bloginfo')) {
     function get_bloginfo(string $show = ''): string
