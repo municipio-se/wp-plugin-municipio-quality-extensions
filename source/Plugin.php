@@ -6,6 +6,7 @@ namespace MunicipioQualityExtensions;
 
 use MunicipioQualityExtensions\Cards\LinkedCards;
 use MunicipioQualityExtensions\Headings\AccordionHeadings;
+use MunicipioQualityExtensions\Headings\ContactBannerHeadings;
 use MunicipioQualityExtensions\Headings\PostsHeadings;
 use MunicipioQualityExtensions\Performance\MaterialSymbolsSvgFactory;
 use MunicipioQualityExtensions\Performance\NavigationIndexCommand;
@@ -23,5 +24,6 @@ final class Plugin
         (new LinkedCards(dirname(__DIR__) . '/municipio-quality-extensions.php'))->register();
         (new PostsHeadings())->register();
         (new AccordionHeadings())->register();
+        (new ContactBannerHeadings())->register();
     }
 }

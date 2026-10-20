@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.0 — 2026-10-20
+
+Give Contact Banner opening-hours and contact-card titles H3 beneath a visible
+module heading, otherwise H2, while preserving their typography. Omit empty
+contact-card headings and place each card's content headings beneath its title
+or the module heading, retaining relative depth up to H6. Saved content and
+embedded components remain unchanged.
+
+Cover module, shortcode, API and block rendering, with versioned fragment caches
+and stable levels when cached markup is processed repeatedly.
+
 ## 1.2.1 — 2026-10-20
 
 Preserve the original Posts block callback in Modularity's serialized cache

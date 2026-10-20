@@ -14,7 +14,7 @@ final class AccordionContent
         return in_array($class, preg_split('/\s+/', trim($element->getAttribute('class'))), true);
     }
 
-    public function prepare(string $html): ?string
+    public function prepare(string $html, string $depthAttribute = 'data-qx-accordion-depth'): ?string
     {
         if ($html === '') {
             return '';
@@ -42,7 +42,7 @@ final class AccordionContent
             if (($levels[$index] ?? null) !== null) {
                 // Retain relative depth in rendered cache fragments: H6 clipping
                 // must not erase it when the same markup is processed again.
-                $tags->set_attribute('data-qx-accordion-depth', (string) ($levels[$index] - $base));
+                $tags->set_attribute($depthAttribute, (string) ($levels[$index] - $base));
             }
             $index++;
         }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Plugin Name:       Municipio Quality Extensions
  * Description:       Adds focused runtime quality improvements to modern Municipio installations.
- * Version:           1.3.0
+ * Version:           1.4.0
  * Author:            Whitespace
  * Requires PHP:      8.2
  * License:           MIT
